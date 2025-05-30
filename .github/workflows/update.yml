@@ -47,7 +47,7 @@ jobs:
           method: 'GET'
       - name: Show Response
         run: |
-          echo ${{ fromJson(steps.myRequest.outputs.response) }}
+          echo ${{ fromJson(steps.myRequest.outputs.response)[0] }}
       - name: Update Latest Version
         run: |
           echo "$Latest_Version"
