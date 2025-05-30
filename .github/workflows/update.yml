@@ -50,4 +50,4 @@ jobs:
           echo ${{ fromJson(steps.myRequest.outputs.response)[0] }}
       - name: Update Latest Version
         run: |
-          echo "$Latest_Version"
+          echo ${{ vars.Latest_Version }}
