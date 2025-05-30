@@ -41,7 +41,8 @@ jobs:
         id: myRequest
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://api.modrinth.com/project/BYfVnHa7/version'
+          #https://api.modrinth.com/project/BYfVnHa7/version
+          url: 'https://staging-api.modrinth.com/'
           method: 'GET'
       - name: Show Response
         run: |
