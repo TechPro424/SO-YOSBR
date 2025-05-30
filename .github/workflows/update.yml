@@ -54,4 +54,4 @@ jobs:
       - name: Update Latest Version
         if: ${{ vars.Latest_Version == 'null' || vars.Latest_Version != fromJson(steps.myRequest.outputs.response)[0].id }}
         run: |
-          vars.Latest_Version = fromJson(steps.myRequest.outputs.response)[0].id
+          ${{ vars.Latest_Version = fromJson(steps.myRequest.outputs.response)[0].id }}
