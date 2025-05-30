@@ -48,6 +48,10 @@ jobs:
       - name: Show Response
         run: |
           echo ${{ fromJson(steps.myRequest.outputs.response)[0] }}
-      - name: Update Latest Version
+      - name: Show Latest Version
         run: |
           echo ${{ vars.Latest_Version }}
+      - name: Update Latest Version
+        if: ${{ vars.Latest_Version == 'null' || vars.Latest_Version != fromJson(steps.myRequest.outputs.response)[0].id }}
+        run: |
+          vars.Latest_Version = fromJson(steps.myRequest.outputs.response)[0].id
