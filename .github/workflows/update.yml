@@ -26,6 +26,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+      - name: Set up Python 3.13.3
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.13.3"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests==2.32.3
+          
       
 
       # Runs a single command using the runners shell
@@ -38,20 +47,4 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-      - name: Send request
-        id: myRequest
-        uses: fjogeleit/http-request-action@v1
-        with:
-          #https://api.modrinth.com/project/BYfVnHa7/version
-          url: 'https://api.modrinth.com/v2/project/BYfVnHa7/version'
-          method: 'GET'
-      - name: Show Response
-        run: |
-          echo ${{ fromJson(steps.myRequest.outputs.response)[0] }}
-      - name: Show Latest Version
-        run: |
-          echo ${{ vars.Latest_Version }}
-      - name: Update Latest Version
-        if: ${{ vars.Latest_Version == 'null' || vars.Latest_Version != fromJson(steps.myRequest.outputs.response)[0].id }}
-        run: |
-          ${{ vars.Latest_Version = fromJson(steps.myRequest.outputs.response)[0].id }}
+     
