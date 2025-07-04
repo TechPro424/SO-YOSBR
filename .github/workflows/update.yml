@@ -34,6 +34,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests==2.32.3
+      - name: Run Script
+        env:
+          TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: python update.py
           
       
 
