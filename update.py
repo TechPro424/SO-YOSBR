@@ -5,10 +5,12 @@ latest = (requests.get(url = 'https://api.modrinth.com/v2/project/BYfVnHa7/versi
 latest_id = latest.get('id')
 
 #"check if there is a corresponding version in my project"
-latest_mypack_changelog = (requests.get(url='https://api.modrinth.com/v2/project/Uq3JO1Dp/version', headers=useragent).json())[0].get('changelog')
-if latest_mypack_changelog.startswith(latest_id): 
-    print('Already exists')
-    sys.exit()
+latest_mypack = (requests.get(url='https://api.modrinth.com/v2/project/Uq3JO1Dp/version', headers=useragent).json())
+if latest_mypack:
+    latest_mypack_changelog = latest_mypack[0].get('changelog')
+    if latest_mypack_changelog.startswith(latest_id): 
+        print('Already exists')
+        sys.exit()
 
 
 
