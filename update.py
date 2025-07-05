@@ -21,10 +21,10 @@ with open('SO.zip', 'wb') as so_file:
         if chunk: so_file.write(chunk)
 
 '''extract zip file'''
-os.makedirs('.\\SO', exist_ok=True)
+os.makedirs('./SO', exist_ok=True)
 
 with ZipFile('SO.zip', 'r') as zip:
-    zip.extractall(path='.\\SO')
+    zip.extractall(path='./SO')
     zip.close()
 
 mc_version = latest.get('game_versions')[0]
@@ -34,18 +34,18 @@ if not (yosbr_req.json()): yosbr_req = requests.get(url=('https://api.modrinth.c
 
 
 yosbr_file_content = requests.get(url=yosbr_req.json()[0].get('files')[0].get('url'), stream=True, headers=useragent)
-os.makedirs('.\\SO\\overrides\\mods', exist_ok=True)
-with open('.\\SO\\overrides\\mods\\yosbr.jar', 'wb') as yosbr_file:
+os.makedirs('./SO/overrides/mods', exist_ok=True)
+with open('./SO/overrides/mods/yosbr.jar', 'wb') as yosbr_file:
     for chunk in yosbr_file_content.iter_content(chunk_size=1024):
         if chunk: yosbr_file.write(chunk)
 
-os.makedirs( '.\\SO\\overrides\\config\\yosbr\\', exist_ok=True)
-shutil.move('.\\SO\\overrides\\options.txt', '.\\SO\\overrides\\config\\yosbr\\')
+os.makedirs( './SO/overrides/config/yosbr/', exist_ok=True)
+shutil.move('./SO/overrides/options.txt', './SO/overrides/config/yosbr/options.txt')
 
 os.remove('SO.zip')
 shutil.make_archive('SO', 'zip', 'SO')
 os.rename('SO.zip', 'SO.mrpack')
-shutil.rmtree('.\\SO\\')
+shutil.rmtree('./SO/')
 
 
 files = {'file': open('SO.mrpack', 'rb')}
