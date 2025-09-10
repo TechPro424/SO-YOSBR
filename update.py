@@ -44,11 +44,11 @@ shutil.move('./SO/overrides/options.txt', './SO/overrides/config/yosbr/options.t
 
 os.remove('SO.zip')
 shutil.make_archive('SO', 'zip', 'SO')
-os.rename('SO.zip', 'SO.mrpack')
+os.rename('SO.zip', 'SO_YOSBR.mrpack')
 shutil.rmtree('./SO/')
 
 
-files = {'file': open('SO.mrpack', 'rb')}
+files = {'file': open('SO_YOSBR.mrpack', 'rb')}
 
 data = {
         'name': latest.get('name'), 
@@ -85,6 +85,7 @@ payload = {'data': json.dumps(data)}
 token = os.environ.get('TOKEN')
 useragent.update({'Authorization': token})
 upload = requests.post('https://api.modrinth.com/v2/version', files=files, headers=useragent, data=payload)
+
 
 
 
